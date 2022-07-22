@@ -1,0 +1,7 @@
+ARG_ENABLE('sdl_ttf', 'sdl_ttf support', 'no');
+
+if (PHP_SDL_TTF != 'no') {
+	AC_DEFINE('HAVE_SDL_TTF', 1, 'sdl_ttf support enabled');
+
+	EXTENSION('sdl_ttf', 'sdl_ttf.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+}
