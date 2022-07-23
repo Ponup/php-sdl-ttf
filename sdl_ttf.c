@@ -22,47 +22,37 @@ extern zend_bool sdl_surface_to_zval(SDL_Surface *surface, zval *z_val);
 
 PHP_FUNCTION(TTF_Init)
 {
+	ZEND_PARSE_PARAMETERS_NONE();
+
 	RETURN_LONG(TTF_Init());
 }
 
 PHP_FUNCTION(TTF_Quit)
 {
+	ZEND_PARSE_PARAMETERS_NONE();
+
 	TTF_Quit();
 }
 
-/* {{{ void test1() */
-PHP_FUNCTION(test1)
+PHP_FUNCTION(TTF_RenderText_Solid)
 {
-	ZEND_PARSE_PARAMETERS_NONE();
+	char *text;
+	size_t text_len;
+
+	zval *z_color;
+
+	ZEND_PARSE_PARAMETERS_START(2, 2)
+	Z_PARAM_STRING(text, text_len)
+	Z_PARAM_ZVAL(z_color)
+	ZEND_PARSE_PARAMETERS_END();
 
 	TTF_Font *font = TTF_OpenFont("arial.ttf", 40);
-	SDL_Color color = {255, 255, 255};
-	SDL_Surface *surface = TTF_RenderText_Solid(font, "Open | Give | Pick up | Use | Walk | Talk", color);
+	SDL_Color *color = (SDL_Color *)// todo fetch from zval;
+	SDL_Surface *surface = TTF_RenderText_Solid(font, text, *color);
 	TTF_CloseFont(font);
-
-	php_printf("The extension %s is loaded and working!\r\n", "sdl_ttf");
 
 	sdl_surface_to_zval(surface, return_value);
 }
-/* }}} */
-
-/* {{{ string test2( [ string $var ] ) */
-PHP_FUNCTION(test2)
-{
-	char *var = "World";
-	size_t var_len = sizeof("World") - 1;
-	zend_string *retval;
-
-	ZEND_PARSE_PARAMETERS_START(0, 1)
-	Z_PARAM_OPTIONAL
-	Z_PARAM_STRING(var, var_len)
-	ZEND_PARSE_PARAMETERS_END();
-
-	retval = strpprintf(0, "Hello %s", var);
-
-	RETURN_STR(retval);
-}
-/* }}}*/
 
 /* {{{ PHP_RINIT_FUNCTION */
 PHP_RINIT_FUNCTION(sdl_ttf)
