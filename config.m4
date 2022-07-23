@@ -34,33 +34,33 @@ if test "$PHP_SDL_TTF" != "no"; then
 
   dnl Remove this code block if the library supports pkg-config.
   dnl --with-sdl_ttf -> check with-path
-  dnl SEARCH_PATH="/usr/local /usr"     # you might want to change this
-  dnl SEARCH_FOR="/include/sdl_ttf.h"  # you most likely want to change this
-  dnl if test -r $PHP_SDL_TTF/$SEARCH_FOR; then # path given as parameter
-  dnl   SDL_TTF_DIR=$PHP_SDL_TTF
-  dnl else # search default path list
-  dnl   AC_MSG_CHECKING([for sdl_ttf files in default path])
-  dnl   for i in $SEARCH_PATH ; do
-  dnl     if test -r $i/$SEARCH_FOR; then
-  dnl       SDL_TTF_DIR=$i
-  dnl       AC_MSG_RESULT(found in $i)
-  dnl     fi
-  dnl   done
-  dnl fi
-  dnl
-  dnl if test -z "$SDL_TTF_DIR"; then
-  dnl   AC_MSG_RESULT([not found])
-  dnl   AC_MSG_ERROR([Please reinstall the sdl_ttf distribution])
-  dnl fi
+  SEARCH_PATH="/usr/local /usr"     # you might want to change this
+  SEARCH_FOR="/include/SDL2/SDL_ttf.h"  # you most likely want to change this
+  if test -r $PHP_SDL_TTF/$SEARCH_FOR; then # path given as parameter
+    SDL_TTF_DIR=$PHP_SDL_TTF
+  else # search default path list
+    AC_MSG_CHECKING([for sdl_ttf files in default path])
+    for i in $SEARCH_PATH ; do
+      if test -r $i/$SEARCH_FOR; then
+        SDL_TTF_DIR=$i
+        AC_MSG_RESULT(found in $i)
+      fi
+    done
+  fi
+  
+  if test -z "$SDL_TTF_DIR"; then
+    AC_MSG_RESULT([not found])
+    AC_MSG_ERROR([Please reinstall the sdl_ttf distribution])
+   fi
 
   dnl Remove this code block if the library supports pkg-config.
   dnl --with-sdl_ttf -> add include path
-  dnl PHP_ADD_INCLUDE($SDL_TTF_DIR/include)
+  PHP_ADD_INCLUDE($SDL_TTF_DIR/include)
 
   dnl Remove this code block if the library supports pkg-config.
   dnl --with-sdl_ttf -> check for lib and symbol presence
-  dnl LIBNAME=SDL_TTF # you may want to change this
-  dnl LIBSYMBOL=SDL_TTF # you most likely want to change this
+  LIBNAME=SDL2_ttf # you may want to change this
+  LIBSYMBOL=TTF_Init # you most likely want to change this
 
   dnl If you need to check for a particular library function (e.g. a conditional
   dnl or version-dependent feature) and you are using pkg-config:
@@ -75,20 +75,20 @@ if test "$PHP_SDL_TTF" != "no"; then
 
   dnl If you need to check for a particular library function (e.g. a conditional
   dnl or version-dependent feature) and you are not using pkg-config:
-  dnl PHP_CHECK_LIBRARY($LIBNAME, $LIBSYMBOL,
-  dnl [
-  dnl   PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $SDL_TTF_DIR/$PHP_LIBDIR, SDL_TTF_SHARED_LIBADD)
-  dnl   AC_DEFINE(HAVE_SDL_TTF_FEATURE, 1, [ ])
-  dnl ],[
-  dnl   AC_MSG_ERROR([FEATURE not supported by your sdl_ttf library.])
-  dnl ],[
-  dnl   -L$SDL_TTF_DIR/$PHP_LIBDIR -lm
-  dnl ])
-  dnl
-  dnl PHP_SUBST(SDL_TTF_SHARED_LIBADD)
+  PHP_CHECK_LIBRARY($LIBNAME, $LIBSYMBOL,
+  [
+    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $SDL_TTF_DIR/$PHP_LIBDIR, SDL_TTF_SHARED_LIBADD)
+    AC_DEFINE(HAVE_SDL_TTF_FEATURE, 1, [ ])
+  ],[
+    AC_MSG_ERROR([FEATURE not supported by your sdl_ttf library.])
+  ],[
+    -L$SDL_TTF_DIR/$PHP_LIBDIR -lm
+  ])
+  
+    PHP_SUBST(SDL_TTF_SHARED_LIBADD)
 
   dnl In case of no dependencies
-  AC_DEFINE(HAVE_SDL_TTF, 1, [ Have sdl_ttf support ])
+  dnl AC_DEFINE(HAVE_SDL_TTF, 1, [ Have sdl_ttf support ])
 
   PHP_NEW_EXTENSION(sdl_ttf, sdl_ttf.c, $ext_shared)
 fi
