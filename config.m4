@@ -90,5 +90,6 @@ if test "$PHP_SDL_TTF" != "no"; then
   dnl In case of no dependencies
   dnl AC_DEFINE(HAVE_SDL_TTF, 1, [ Have sdl_ttf support ])
 
-  PHP_NEW_EXTENSION(sdl_ttf, sdl_ttf.c, $ext_shared)
+  PHP_NEW_EXTENSION(sdl_ttf, sdl_ttf.c sdl_ttf_font.c, $ext_shared)
+  PHP_ADD_EXTENSION_DEP(sdl_ttf, sdl)
 fi

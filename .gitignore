@@ -41,3 +41,5 @@ tests/**/*.mem
 tmp-php.ini
 tags
 sdl_ttf.dep
+*.dep
+*.*~

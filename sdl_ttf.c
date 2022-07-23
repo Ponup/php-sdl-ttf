@@ -8,10 +8,13 @@
 #include "ext/standard/info.h"
 #include "php_sdl_ttf.h"
 #include "sdl_ttf_arginfo.h"
+#include "sdl_ttf_font.h"
 
 #include <SDL2/SDL_ttf.h>
 
+extern zend_class_entry *ttf_font_ce;
 extern zend_bool sdl_surface_to_zval(SDL_Surface *surface, zval *z_val);
+extern zend_bool zval_to_sdl_color(zval *value, SDL_Color *color);
 
 /* For compatibility with older PHP versions */
 #ifndef ZEND_PARSE_PARAMETERS_NONE
@@ -34,22 +37,54 @@ PHP_FUNCTION(TTF_Quit)
 	TTF_Quit();
 }
 
+PHP_FUNCTION(TTF_OpenFont)
+{
+	char *name;
+	size_t name_len;
+	zend_long size;
+
+	ZEND_PARSE_PARAMETERS_START(2, 2)
+	Z_PARAM_STRING(name, name_len)
+	Z_PARAM_LONG(size)
+	ZEND_PARSE_PARAMETERS_END();
+
+	TTF_Font *font = TTF_OpenFont(name, size);
+
+	ttf_font_to_zval(font, return_value);
+}
+
+PHP_FUNCTION(TTF_CloseFont)
+{
+	zval *z_font;
+
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+	Z_PARAM_ZVAL(z_font)
+	ZEND_PARSE_PARAMETERS_END();
+
+	TTF_Font *font;
+	font = php_ttf_font_from_zval_p(z_font);
+
+	TTF_CloseFont(font);
+}
+
 PHP_FUNCTION(TTF_RenderText_Solid)
 {
 	char *text;
 	size_t text_len;
 
-	zval *z_color;
+	zval *z_font, *z_color;
 
-	ZEND_PARSE_PARAMETERS_START(2, 2)
+	ZEND_PARSE_PARAMETERS_START(3, 3)
+	Z_PARAM_OBJECT_OF_CLASS(z_font, ttf_font_ce)
 	Z_PARAM_STRING(text, text_len)
 	Z_PARAM_ZVAL(z_color)
 	ZEND_PARSE_PARAMETERS_END();
 
-	TTF_Font *font = TTF_OpenFont("arial.ttf", 40);
-	SDL_Color *color = (SDL_Color *)// todo fetch from zval;
-	SDL_Surface *surface = TTF_RenderText_Solid(font, text, *color);
-	TTF_CloseFont(font);
+	TTF_Font *font;
+	font = php_ttf_font_from_zval_p(z_font);
+	SDL_Color color;
+	zval_to_sdl_color(z_color, &color);
+	SDL_Surface *surface = TTF_RenderText_Solid(font, text, color);
 
 	sdl_surface_to_zval(surface, return_value);
 }
@@ -68,11 +103,24 @@ PHP_RINIT_FUNCTION(sdl_ttf)
 /* {{{ PHP_MINFO_FUNCTION */
 PHP_MINFO_FUNCTION(sdl_ttf)
 {
+	char buffer[128];
+	const SDL_version *linked_version = TTF_Linked_Version();
+
 	php_info_print_table_start();
-	php_info_print_table_header(2, "sdl_ttf support", "enabled");
+	php_info_print_table_header(2, "SDL_ttf support", "enabled");
+	php_info_print_table_row(2, "SDL_ttf PHP extension version", PHP_SDL_TTF_VERSION);
+	snprintf(buffer, sizeof(buffer), "%d.%d.%d", linked_version->major, linked_version->minor, linked_version->patch);
+	php_info_print_table_row(2, "SDL_ttf linked version", buffer);
 	php_info_print_table_end();
 }
 /* }}} */
+
+PHP_MINIT_FUNCTION(sdl_ttf)
+{
+	php_ttf_font_minit_helper();
+
+	return SUCCESS;
+}
 
 static const zend_module_dep ext_deps[] = {
 	ZEND_MOD_REQUIRED("sdl")
@@ -85,7 +133,7 @@ zend_module_entry sdl_ttf_module_entry = {
 	ext_deps,
 	"sdl_ttf",			 /* Extension name */
 	ext_functions,		 /* zend_function_entry */
-	NULL,				 /* PHP_MINIT - Module initialization */
+	PHP_MINIT(sdl_ttf),	 /* PHP_MINIT - Module initialization */
 	NULL,				 /* PHP_MSHUTDOWN - Module shutdown */
 	PHP_RINIT(sdl_ttf),	 /* PHP_RINIT - Request initialization */
 	NULL,				 /* PHP_RSHUTDOWN - Request shutdown */
