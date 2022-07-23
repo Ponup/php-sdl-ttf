@@ -20,17 +20,25 @@ extern zend_bool sdl_surface_to_zval(SDL_Surface *surface, zval *z_val);
 	ZEND_PARSE_PARAMETERS_END()
 #endif
 
+PHP_FUNCTION(TTF_Init)
+{
+	RETURN_LONG(TTF_Init());
+}
+
+PHP_FUNCTION(TTF_Quit)
+{
+	TTF_Quit();
+}
+
 /* {{{ void test1() */
 PHP_FUNCTION(test1)
 {
 	ZEND_PARSE_PARAMETERS_NONE();
 
-	TTF_Init();
 	TTF_Font *font = TTF_OpenFont("arial.ttf", 40);
 	SDL_Color color = {255, 255, 255};
 	SDL_Surface *surface = TTF_RenderText_Solid(font, "Open | Give | Pick up | Use | Walk | Talk", color);
 	TTF_CloseFont(font);
-	TTF_Quit();
 
 	php_printf("The extension %s is loaded and working!\r\n", "sdl_ttf");
 
