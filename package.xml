@@ -4,12 +4,12 @@
  <channel>pecl.php.net</channel>
  <summary>SDL_ttf bindings for the PHP language</summary>
  <description>SDL_ttf bindings for the PHP language</description>
- <lead>
-  <name/>
-  <user/>
-  <email/>
-  <active>yes</active>
- </lead>
+  <lead>
+    <name>Santiago Lizardo</name>
+    <user>santiagolizardo</user>
+    <email>santiagolizardo@php.net</email>
+    <active>yes</active>
+  </lead>
  <date>2022-07-24</date>
  <version>
   <release>0.2.0</release>
@@ -25,6 +25,7 @@ Initial release with basic Init/Quit Open and Close Font and render solid text
  </notes>
  <contents>
   <dir name="/">
+   <file name="LICENSE" role="doc"/>
    <file name="config.m4" role="src"/>
    <file name="php_sdl_ttf.h" role="src"/>
    <file name="sdl_ttf.c" role="src"/>
