@@ -92,4 +92,5 @@ if test "$PHP_SDL_TTF" != "no"; then
 
   PHP_NEW_EXTENSION(sdl_ttf, sdl_ttf.c sdl_ttf_font.c, $ext_shared)
   PHP_ADD_EXTENSION_DEP(sdl_ttf, sdl)
+  PHP_ADD_MAKEFILE_FRAGMENT
 fi
