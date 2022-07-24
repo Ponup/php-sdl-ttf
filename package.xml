@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sdl_ttf</name>
+ <channel>pecl.php.net</channel>
+ <summary/>
+ <description/>
+ <lead>
+  <name/>
+  <user/>
+  <email/>
+  <active>yes</active>
+ </lead>
+ <date>2022-07-24</date>
+ <version>
+  <release>0.2.0</release>
+  <api>0.2.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.php.net/license/3_0.txt">PHP License</license>
+ <notes>
+Initial release with basic Init/Quit Open and Close Font and render solid text
+ </notes>
+ <contents>
+  <dir name="/">
+   <file name="config.m4" role="src"/>
+   <file name="php_sdl_ttf.h" role="src"/>
+   <file name="sdl_ttf.c" role="src"/>
+   <file name="sdl_ttf_arginfo.h" role="src"/>
+   <file name="sdl_ttf_font.c" role="src"/>
+   <file name="sdl_ttf_font.h" role="src"/>
+   <dir name="tests">
+    <file name="001.phpt" role="test"/>
+    <file name="002.phpt" role="test"/>
+    <file name="003.phpt" role="test"/>
+   </dir>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>7.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <providesextension/>
+ <extsrcrelease/>
+ <changelog>
+  <release>
+   <date>2022-07-24</date>
+   <time>17:58:20</time>
+   <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <license uri="http://www.php.net/license/3_0.txt">PHP License</license>
+   <notes>
+Initial release with basic Init/Quit Open and Close Font and render solid text
+   </notes>
+  </release>
+ </changelog>
+</package>
