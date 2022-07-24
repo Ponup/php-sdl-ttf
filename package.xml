@@ -2,8 +2,8 @@
 <package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>sdl_ttf</name>
  <channel>pecl.php.net</channel>
- <summary/>
- <description/>
+ <summary>SDL_ttf bindings for the PHP language</summary>
+ <description>SDL_ttf bindings for the PHP language</description>
  <lead>
   <name/>
   <user/>
@@ -48,7 +48,7 @@ Initial release with basic Init/Quit Open and Close Font and render solid text
    </pearinstaller>
   </required>
  </dependencies>
- <providesextension/>
+ <providesextension>sdl_ttf</providesextension>
  <extsrcrelease/>
  <changelog>
   <release>
