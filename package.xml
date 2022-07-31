@@ -42,11 +42,17 @@ Initial release with basic Init/Quit Open and Close Font and render solid text
  <dependencies>
   <required>
    <php>
-    <min>7.0.0</min>
+    <min>7.3.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.3</min>
+    <min>1.10</min>
    </pearinstaller>
+   <package>
+    <name>sdl</name>
+    <channel>pecl.php.net</channel>
+    <min>2.3.0</min>
+    <providesextension>sdl</providesextension>
+   </package>
   </required>
  </dependencies>
  <providesextension>sdl_ttf</providesextension>
