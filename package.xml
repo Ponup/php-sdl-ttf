@@ -25,6 +25,7 @@ Initial release with basic Init/Quit Open and Close Font and render solid text
  </notes>
  <contents>
   <dir name="/">
+   <file name="CREDITS" role="doc"/>
    <file name="LICENSE" role="doc"/>
    <file name="config.m4" role="src"/>
    <file name="php_sdl_ttf.h" role="src"/>
