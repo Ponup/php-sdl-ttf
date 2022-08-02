@@ -4,16 +4,16 @@
  <channel>pecl.php.net</channel>
  <summary>SDL_ttf bindings for the PHP language</summary>
  <description>SDL_ttf bindings for the PHP language</description>
-  <lead>
-    <name>Santiago Lizardo</name>
-    <user>santiagolizardo</user>
-    <email>santiagolizardo@php.net</email>
-    <active>yes</active>
-  </lead>
- <date>2022-07-24</date>
+ <lead>
+  <name>Santiago Lizardo</name>
+  <user>santiagolizardo</user>
+  <email>santiagolizardo@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2022-08-02</date>
  <version>
-  <release>0.2.0</release>
-  <api>0.2.0</api>
+  <release>0.3.0</release>
+  <api>0.3.0</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -21,13 +21,14 @@
  </stability>
  <license uri="http://www.php.net/license/3_0.txt">PHP License</license>
  <notes>
-Initial release with basic Init/Quit Open and Close Font and render solid text
+Add TTF_WasInit, TTF_RenderText_Blended and TTF_RenderText_Shaded functions.
+Add dependency on SDL extension on package.xml file (Remi Collet)
  </notes>
  <contents>
   <dir name="/">
+   <file name="config.m4" role="src"/>
    <file name="CREDITS" role="doc"/>
    <file name="LICENSE" role="doc"/>
-   <file name="config.m4" role="src"/>
    <file name="php_sdl_ttf.h" role="src"/>
    <file name="sdl_ttf.c" role="src"/>
    <file name="sdl_ttf_arginfo.h" role="src"/>
@@ -59,6 +60,23 @@ Initial release with basic Init/Quit Open and Close Font and render solid text
  <providesextension>sdl_ttf</providesextension>
  <extsrcrelease/>
  <changelog>
+  <release>
+   <date>2022-08-02</date>
+   <time>22:11:07</time>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <license uri="http://www.php.net/license/3_0.txt">PHP License</license>
+   <notes>
+Add TTF_WasInit, TTF_RenderText_Blended and TTF_RenderText_Shaded functions.
+Add dependency on SDL extension on package.xml file (Remi Collet)
+   </notes>
+  </release>
   <release>
    <date>2022-07-24</date>
    <time>17:58:20</time>
