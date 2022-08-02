@@ -44,3 +44,4 @@ sdl_ttf.dep
 *.dep
 *.*~
 *.tgz
+tags*

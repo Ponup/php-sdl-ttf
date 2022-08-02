@@ -30,6 +30,13 @@ PHP_FUNCTION(TTF_Init)
 	RETURN_LONG(TTF_Init());
 }
 
+PHP_FUNCTION(TTF_WasInit)
+{
+	ZEND_PARSE_PARAMETERS_NONE();
+
+	RETURN_LONG(TTF_WasInit());
+}
+
 PHP_FUNCTION(TTF_Quit)
 {
 	ZEND_PARSE_PARAMETERS_NONE();
@@ -85,6 +92,52 @@ PHP_FUNCTION(TTF_RenderText_Solid)
 	SDL_Color color;
 	zval_to_sdl_color(z_color, &color);
 	SDL_Surface *surface = TTF_RenderText_Solid(font, text, color);
+
+	sdl_surface_to_zval(surface, return_value);
+}
+
+PHP_FUNCTION(TTF_RenderText_Blended)
+{
+	char *text;
+	size_t text_len;
+
+	zval *z_font, *z_color;
+
+	ZEND_PARSE_PARAMETERS_START(3, 3)
+	Z_PARAM_OBJECT_OF_CLASS(z_font, ttf_font_ce)
+	Z_PARAM_STRING(text, text_len)
+	Z_PARAM_ZVAL(z_color)
+	ZEND_PARSE_PARAMETERS_END();
+
+	TTF_Font *font;
+	font = php_ttf_font_from_zval_p(z_font);
+	SDL_Color color;
+	zval_to_sdl_color(z_color, &color);
+	SDL_Surface *surface = TTF_RenderText_Blended(font, text, color);
+
+	sdl_surface_to_zval(surface, return_value);
+}
+
+PHP_FUNCTION(TTF_RenderText_Shaded)
+{
+	char *text;
+	size_t text_len;
+
+	zval *z_font, *z_color, *z_backgroundColor;
+
+	ZEND_PARSE_PARAMETERS_START(3, 3)
+	Z_PARAM_OBJECT_OF_CLASS(z_font, ttf_font_ce)
+	Z_PARAM_STRING(text, text_len)
+	Z_PARAM_ZVAL(z_color)
+	Z_PARAM_ZVAL(z_backgroundColor)
+	ZEND_PARSE_PARAMETERS_END();
+
+	TTF_Font *font;
+	font = php_ttf_font_from_zval_p(z_font);
+	SDL_Color color, backgroundColor;
+	zval_to_sdl_color(z_color, &color);
+	zval_to_sdl_color(z_backgroundColor, &backgroundColor);
+	SDL_Surface *surface = TTF_RenderText_Shaded(font, text, color, backgroundColor);
 
 	sdl_surface_to_zval(surface, return_value);
 }
