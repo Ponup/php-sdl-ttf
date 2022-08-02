@@ -125,7 +125,7 @@ PHP_FUNCTION(TTF_RenderText_Shaded)
 
 	zval *z_font, *z_color, *z_backgroundColor;
 
-	ZEND_PARSE_PARAMETERS_START(3, 3)
+	ZEND_PARSE_PARAMETERS_START(4, 4)
 	Z_PARAM_OBJECT_OF_CLASS(z_font, ttf_font_ce)
 	Z_PARAM_STRING(text, text_len)
 	Z_PARAM_ZVAL(z_color)
