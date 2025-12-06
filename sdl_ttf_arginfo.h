@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: a227cb9e9a1c09d4ad3d395fa603dd775fb0820a */
+ * Stub hash: d93a047aa37dd4788e381d46aa9dc29e6ca5cdaf */
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_TTF_Init, 0, 0, IS_LONG, 0)
 ZEND_END_ARG_INFO()
@@ -18,19 +18,30 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_TTF_CloseFont, 0, 1, IS_LONG, 0)
 	ZEND_ARG_OBJ_INFO(0, font, TTF_Font, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_TTF_RenderText_Solid, 0, 3, SDL_Surface, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_TTF_RenderText_Solid, 0, 3, SDL_Surface, 1)
 	ZEND_ARG_OBJ_INFO(0, font, TTF_Font, 0)
 	ZEND_ARG_TYPE_INFO(0, text, IS_STRING, 0)
 	ZEND_ARG_OBJ_INFO(0, color, SDL_Color, 0)
 ZEND_END_ARG_INFO()
 
-#define arginfo_TTF_RenderText_Blended arginfo_TTF_RenderText_Solid
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_TTF_RenderText_Blended, 0, 3, SDL_Surface, 0)
+	ZEND_ARG_OBJ_INFO(0, font, TTF_Font, 0)
+	ZEND_ARG_TYPE_INFO(0, text, IS_STRING, 0)
+	ZEND_ARG_OBJ_INFO(0, color, SDL_Color, 0)
+ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_TTF_RenderText_Shaded, 0, 4, SDL_Surface, 0)
 	ZEND_ARG_OBJ_INFO(0, font, TTF_Font, 0)
 	ZEND_ARG_TYPE_INFO(0, text, IS_STRING, 0)
 	ZEND_ARG_OBJ_INFO(0, color, SDL_Color, 0)
 	ZEND_ARG_OBJ_INFO(0, backgroundColor, SDL_Color, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_TTF_SizeUTF8, 0, 4, IS_VOID, 0)
+	ZEND_ARG_OBJ_INFO(0, font, TTF_Font, 0)
+	ZEND_ARG_TYPE_INFO(0, text, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(1, w, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(1, h, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
 
@@ -42,6 +53,7 @@ ZEND_FUNCTION(TTF_CloseFont);
 ZEND_FUNCTION(TTF_RenderText_Solid);
 ZEND_FUNCTION(TTF_RenderText_Blended);
 ZEND_FUNCTION(TTF_RenderText_Shaded);
+ZEND_FUNCTION(TTF_SizeUTF8);
 
 
 static const zend_function_entry ext_functions[] = {
@@ -53,6 +65,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(TTF_RenderText_Solid, arginfo_TTF_RenderText_Solid)
 	ZEND_FE(TTF_RenderText_Blended, arginfo_TTF_RenderText_Blended)
 	ZEND_FE(TTF_RenderText_Shaded, arginfo_TTF_RenderText_Shaded)
+	ZEND_FE(TTF_SizeUTF8, arginfo_TTF_SizeUTF8)
 	ZEND_FE_END
 };
 

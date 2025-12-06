@@ -142,6 +142,28 @@ PHP_FUNCTION(TTF_RenderText_Shaded)
 	sdl_surface_to_zval(surface, return_value);
 }
 
+PHP_FUNCTION(TTF_SizeUTF8)
+{
+    char *text;
+ 	size_t text_len;
+	zval *z_font, *z_width=NULL, *z_height=NULL;
+
+	if( zend_parse_parameters(ZEND_NUM_ARGS(), "zsz/z/", &z_font, &text, &text_len, &z_width, &z_height) == FAILURE ) {
+        return;
+    }
+
+	TTF_Font *font;
+	font = php_ttf_font_from_zval_p(z_font);
+	int w, h;
+
+	TTF_SizeUTF8(font, text, &w, &h);
+
+	zval_dtor(z_width);
+	ZVAL_LONG(z_width, w);
+	zval_dtor(z_height);
+	ZVAL_LONG(z_height, h);
+}
+
 /* {{{ PHP_RINIT_FUNCTION */
 PHP_RINIT_FUNCTION(sdl_ttf)
 {
